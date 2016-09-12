@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="fileExplorer">
+<head>
+  <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Simple File Explorer</title>
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+
+<body ng-controller="mainController" ng-init="loadPath()">
+    <div class="container col-sm-12">
+      <div class="container col-sm-4">
+        <div class="list-group">
+          <button type="button" class="file list-group-item list-group-item-action active">
+            {{pwd}}
+          </button>
+          <button type="button" ng-click="upDirectory()" class="file list-group-item list-group-item-action">..</button>
+          <ng-repeat ng-repeat="directory in directories">
+            <button type="button" ng-click="changeDirectory(directory)" class="file list-group-item list-group-item-action">{{directory}} ></button>
+          </ng-repeat>
+          <ng-repeat ng-repeat="file in files">
+            <button type="button" ng-click="openFile(file)" class="file list-group-item list-group-item-action">{{file}}</button>
+          </ng-repeat>
+        </div>
+      </div>
+      <div class=" container col-sm-8">
+        <div class="content-panel panel panel-default">
+          <div class="panel-body">
+            <input class="form-control" type="text" ng-model="filename" readonly>
+
+            <textarea  class="form-control content-text" ng-model='content' ng-readonly="readonly" rows="25"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+</div>
