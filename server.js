@@ -16,7 +16,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 
 // listen (start app with node server.js) ======================================
-app.listen(PORT);
+app.listen(process.env.PORT || PORT);
 console.log("App listening on port " + PORT	);
 
 app.post('/save', function(req, res){
