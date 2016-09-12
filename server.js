@@ -19,6 +19,16 @@ app.use(methodOverride());
 app.listen(PORT);
 console.log("App listening on port " + PORT	);
 
+app.post('/save', function(req, res){
+  console.log('request body');
+  var filename = req.body.filename;
+  var content = req.body.data;
+
+  fs.writeFile(filename, content, function(err){
+    console.log(err);
+  });
+});
+
 app.get('/open*', function(req, res){
   var path = req.originalUrl.substring(5);
 
@@ -28,8 +38,6 @@ app.get('/open*', function(req, res){
 
     var buffer = new Buffer(1024);
     fs.read(fd, buffer, 0, 1024, 0, function(err, bytesRead, buffer){
-      console.log('buffer = ');
-      console.log(buffer);
       var editable = fileSizeInBytes < 1024;
       var result = {
         'editable' : editable,

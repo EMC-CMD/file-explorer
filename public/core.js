@@ -39,6 +39,20 @@ function mainController($scope, $http){
     }
   };
 
+  $scope.saveContent = function(){
+    var data = {
+      'filename' : $scope.filename,
+      'data' : $scope.content
+    }
+    $http.post('/save', data)
+      .success(function(res){
+        alert('success');
+      })
+      .error(function(){
+        alert('wtf?');
+      });
+  };
+
   $scope.openFile = function(file){
     var filename = $scope.pwd + file;
     var url = '/open' + filename;
