@@ -34,6 +34,19 @@ app.post('/save', function(req, res){
   });
 });
 
+app.post('/createDir', function(req, res){
+  var path = req.body.path;
+
+  fs.mkdir(path, function(err){
+    if(err != null){
+      console.log(err);
+      res.status(500).send();
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+
 app.post('/create', function(req, res){
   var path = req.body.path;
 

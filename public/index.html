@@ -30,8 +30,13 @@
             {{pwd}}
           </button>
           <a href="#" class="list-group-item list-group-item-action">
+            <form ng-submit="createNewDir()">
+              <input class="form-control" placeholder="New Directory Name" type="text" ng-model="newDirName">
+            </form>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
             <form ng-submit="createNewFile()">
-              <input class="form-control" type="text" ng-model="newFilename">
+              <input class="form-control" placeholder="New File Name" type="text" ng-model="newFilename">
             </form>
           </a>
 

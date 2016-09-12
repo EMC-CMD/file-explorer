@@ -7,6 +7,7 @@ function mainController($scope, $http){
   $scope.content = null;
   $scope.showModal = false;
   $scope.newFilename = '';
+  $scope.newDirName = '';
 
   $scope.loadPath = function(){
     var url = '/path' + $scope.pwd;
@@ -27,6 +28,25 @@ function mainController($scope, $http){
     $scope.loadPath();
   };
 
+  $scope.createNewDir = function(){
+    console.log('$scope.newDirName = ' + $scope.newDirName);
+    if($scope.newDirName != null && $scope.newDirName != ''){
+      path = $scope.pwd + $scope.newDirName;
+      var data = {
+        'path': path
+      };
+
+      $http.post('/createDir', data)
+        .success(function(res){
+          $scope.changeDirectory($scope.newDirName);
+          $scope.newDirName = '';
+        })
+        .error(function(){
+          alert('wtf?');
+        });
+    }
+  };
+
   $scope.createNewFile = function(){
     if($scope.newFilename != null && $scope.newFilename != ''){
       path = $scope.pwd + $scope.newFilename;
@@ -37,6 +57,7 @@ function mainController($scope, $http){
       $http.post('/create', data)
         .success(function(res){
           $scope.openFile($scope.newFilename);
+          $scope.loadPath();
           $scope.newFilename = '';
         })
         .error(function(){
