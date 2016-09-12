@@ -1,10 +1,13 @@
 .directory{
   width: 100%;
+  text-align: left;
+  background-color: #ccffff;
 }
 
 .file{
   width: 100%;
   text-align: left;
+  background-color: #ccffcc;
 }
 
 .content-text{
