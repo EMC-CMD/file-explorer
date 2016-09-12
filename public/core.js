@@ -5,6 +5,8 @@ function mainController($scope, $http){
   $scope.filename = null;
   $scope.readonly = true;
   $scope.content = null;
+  $scope.showModal = false;
+  $scope.newFilename = '';
 
   $scope.loadPath = function(){
     var url = '/path' + $scope.pwd;
@@ -23,7 +25,25 @@ function mainController($scope, $http){
 
     $scope.pwd = $scope.pwd + directory + '/';
     $scope.loadPath();
-  }
+  };
+
+  $scope.createNewFile = function(){
+    if($scope.newFilename != null && $scope.newFilename != ''){
+      path = $scope.pwd + $scope.newFilename;
+      var data = {
+        'path': path
+      }
+
+      $http.post('/create', data)
+        .success(function(res){
+          $scope.openFile($scope.newFilename);
+          $scope.newFilename = '';
+        })
+        .error(function(){
+          alert('wtf?');
+        });
+    }
+  };
 
   $scope.upDirectory = function(){
     if($scope.pwd == '/'){
@@ -46,7 +66,7 @@ function mainController($scope, $http){
     }
     $http.post('/save', data)
       .success(function(res){
-        alert('success');
+        alert('Save Successfully');
       })
       .error(function(){
         alert('wtf?');

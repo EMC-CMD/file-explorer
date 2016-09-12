@@ -29,7 +29,14 @@
           <button type="button" class="file list-group-item list-group-item-action active">
             {{pwd}}
           </button>
+          <a href="#" class="list-group-item list-group-item-action">
+            <form ng-submit="createNewFile()">
+              <input class="form-control" type="text" ng-model="newFilename">
+            </form>
+          </a>
+
           <button type="button" ng-click="upDirectory()" class="file list-group-item list-group-item-action">..</button>
+
           <ng-repeat ng-repeat="directory in directories">
             <button type="button" ng-click="changeDirectory(directory)" class="file list-group-item list-group-item-action">{{directory}} ></button>
           </ng-repeat>
@@ -49,9 +56,5 @@
           </div>
         </div>
       </div>
-
-
     </div>
-
-
 </div>

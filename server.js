@@ -25,7 +25,25 @@ app.post('/save', function(req, res){
   var content = req.body.data;
 
   fs.writeFile(filename, content, function(err){
-    console.log(err);
+    if(err != null){
+      console.log(err);
+      res.status(500).send();
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+
+app.post('/create', function(req, res){
+  var path = req.body.path;
+
+  fs.writeFile(path, '', function(err){
+    if(err != null){
+      console.log(err);
+      res.status(500).send();
+    } else {
+      res.status(200).send();
+    }
   });
 });
 
